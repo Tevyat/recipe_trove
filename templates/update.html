@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='favicon.ico')}}">
+    <title>Update {{ recipe.title }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e86c00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .container {
+            width: 80%;
+            margin: 1rem auto 1rem auto; 
+            padding: 20px; 
+            background-color: #f0f0f0; 
+            border-radius: 8px; 
+            min-height: 100px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.762); 
+        }
+
+        .title-bar {
+            margin: 1rem 0 3rem 0;
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            padding: 1rem;
+            border-radius: 0.3rem;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid black;
+        }
+
+        .title-bar:focus {
+            outline: none;
+            border-bottom-color: #e86c00;
+        }
+
+        .grow-wrap {
+            overflow: auto; 
+            display: grid;
+            min-height: 11rem;
+            min-width: 10rem;
+        }
+
+        .grow-wrap::after {
+            content: attr(data-replicated-value) " ";
+            white-space: pre-wrap;
+            visibility: hidden;
+        }
+
+        .grow-wrap > textarea {
+            margin: 0.5rem 0;
+            word-wrap: break-word;
+            resize: none; 
+            overflow: hidden; 
+            border: 1px solid black; 
+            padding: 0.5rem; 
+            font: inherit; 
+            grid-area: 1 / 1 / 2 / 2; 
+            width: 100%;
+            box-sizing: border-box; 
+        }
+
+        .grow-wrap::after {
+            border: 1px solid black;
+            padding: 0.5rem;
+            font: inherit;
+            grid-area: 1 / 1 / 2 / 2;
+        }
+
+        .text-button-container {
+            margin: 1rem 0;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 0.5rem 1rem; 
+            border: 1px solid #ccc; 
+            background-color: #f9f9f9; 
+        }
+
+        .text {
+            font-size: 1rem;
+        }
+
+        .button {
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem; 
+            cursor: pointer; 
+            transition: background-color 0.3s ease-in;
+        }
+
+        .button:hover {
+            background-color: #e86c00; 
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <form action="/update/{{ recipe.title }}", method="POST">
+                <input type="text" name="title" placeholder="Title" class="title-bar" value="{{ recipe.title }}" minlength="5" readonly>
+
+                <h3 for="text">Ingredients:</h3>
+                <div class="grow-wrap" data-replicated-value="">
+                    <textarea name="ingredients" id="ingredients" placeholder="SAMPLE INGREDIENTS: 
+- 1 Cup of Milk
+- 2 Slices of Butter
+- 3 tbsp of Sugar
+- 4 tsp of Salt"
+                    wrap="soft"
+                    onInput="this.parentNode.dataset.replicatedValue = this.value" minlength="10" required>{{ recipe.ingredients }}</textarea>
+                </div>
+                
+                <h3 for="steps">Steps:</h3>
+                <div class="grow-wrap" data-replicated-value="">
+                    <textarea name="steps" id="steps" placeholder="SAMPLE STEPS: 
+1. Prepare your ingredients.
+2. Slice all the ingredients into half.
+3. Place all the ingredients into a pan on medium heat.
+4. Pour milk onto the pan and stir.
+5. Pour the mixture onto a plate.
+6. Serve."
+                    wrap="soft"
+                    onInput="this.parentNode.dataset.replicatedValue = this.value" minlength="10" required>{{ recipe.steps }}</textarea>
+                </div>
+                <div class="text-button-container">
+                    <span class="text">Date created is here.</span>
+                    <button class="button" type="submit">Submit</button>
+                </div>              
+            </form>
+        </div>
+    </div>
+</body>

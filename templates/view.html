@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='favicon.ico')}}">
+    <title>Add Recipe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e86c00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h3 {
+            margin: 2rem 0;
+        }
+
+        p {
+            white-space: pre-wrap; 
+            border: 1px solid #ccc;
+            padding: 1rem; 
+            background-color: #f9f9f9; 
+        }
+
+
+        .container {
+            width: 50%;
+            margin: 1rem auto 1rem auto; 
+            padding: 20px; 
+            background-color: #f0f0f0; 
+            border-radius: 8px; 
+            min-height: 100px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.762); 
+        }
+
+        .text-button-container {
+            margin: 1rem 0;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.5rem 1rem; 
+            border: 1px solid #ccc; 
+            background-color: #f9f9f9; 
+        }
+
+        .text {
+            font-size: 1rem; 
+        }
+
+        .button {
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            padding: 0.5rem 1rem; 
+            font-size: 1rem; 
+            cursor: pointer;
+            transition: background-color 0.3s ease-in;
+        }
+
+        .button:hover {
+            background-color: #e86c00; 
+        }
+
+
+        @media (max-width: 768px) {
+            .container {
+                width: 70%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 80%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>{{recipe.title}}</h1>
+
+            <h3 for="text">Ingredients:</h3>
+            <p>{{recipe.ingredients}}</p>
+                
+            <h3 for="steps">Steps:</h3>
+            <p>{{recipe.steps}}</p>
+            <div class="text-button-container">
+                <span class="text">{{recipe.created}}</span>
+                <div class="separate">
+                    <button class="button" type="submit" onclick="window.location.href='/update/{{recipe.title}}'">Update</button>
+                    <button class="button" type="submit" onclick="window.location.href='/delete/{{recipe.title}}'">Delete</button>
+                </div>
+            </div>              
+        </div>
+    </div>
+</body>

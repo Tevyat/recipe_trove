@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipeTrove</title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='favicon.ico')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}"/>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img id="logo" src="{{url_for('static', filename='logo.png')}}" alt="Logo">
+        </header>
+        <div class="search-container">
+            <form action="/" method="POST" class="row">
+                <input type="text" name="search" placeholder="Search..." class="search-bar" id="search-bar" required autocomplete="off">
+                <!--<button type="submit"><img src="{{url_for('static', filename='search.png')}}"></button>-->
+            </form>
+            <div class="autocomplete-box">
+            </div>
+        </div>
+    </div>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+</body>
+</html>
